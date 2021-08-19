@@ -43,3 +43,11 @@ Adding ```synchronized``` keyword to ```stageOne``` and ```stageTwo``` methods g
 Since ```stageOne``` and ```stageTwo``` are independent: they write to different data, we can create separate locks to synchronize these 2 methods separately.
 
 Here we use ```Object``` as lock object, and wrap around code blocks to create synchronized code blocks. It functions similar to synchronized methods.
+
+## Thread5: Thread Pools
+Use thread pools to manage lots of threads to complete lots of similar tasks.
+
+## Thread6: Countdown Latches
+```CountDownLatch``` class is one of the classes that are thread-safe and no need to worry about thread synchronization. ```CountDownLatch``` counts down from a given number, and lets one or more threads wait until the latch reaches 0.
+
+The purpose of a latch is only to make one or more threads wait until some other threads have completed, or have performed some operations a certain number of times. Threads can make the latch count down, then when zero is reached, any threads that are waiting on the latch will run.
