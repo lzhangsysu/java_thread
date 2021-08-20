@@ -51,3 +51,18 @@ Use thread pools to manage lots of threads to complete lots of similar tasks.
 ```CountDownLatch``` class is one of the classes that are thread-safe and no need to worry about thread synchronization. ```CountDownLatch``` counts down from a given number, and lets one or more threads wait until the latch reaches 0.
 
 The purpose of a latch is only to make one or more threads wait until some other threads have completed, or have performed some operations a certain number of times. Threads can make the latch count down, then when zero is reached, any threads that are waiting on the latch will run.
+
+## Thread7: Producer-Consumer Design Pattern
+Producer-Consumer is the situation where one or more threads are producing data items and adding them to a shared data store of some kind while one or more other threads process those items, removing them from the data store.
+
+Here ArrayBlockingQueue Java class is used for thread-safe adding and removing of items.
+
+## Thread8: Wait and Notify
+```wait()``` and ```notify()``` are methods from Java Object class. They can only be called with synchronized code block.
+Here, ```this``` object itself is used as intrinsic lock. 
+```wait()``` will hand over control of lock to another thread. 
+```notify()``` will notify the waiting thread so it can wake up and re-acquire the lock. It does NOT automatically relinquish the control of the lock.
+If want to notify all waiting threads, can use ```notifyAll()```.
+
+## Thread9: Producer-Consumer with Low-Level Synchronization
+Here we use the low level wait and notify synchronization to implement the producer-consumer pattern.
