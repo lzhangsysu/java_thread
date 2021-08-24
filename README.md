@@ -61,8 +61,35 @@ Here ArrayBlockingQueue Java class is used for thread-safe adding and removing o
 ```wait()``` and ```notify()``` are methods from Java Object class. They can only be called with synchronized code block.
 Here, ```this``` object itself is used as intrinsic lock. 
 ```wait()``` will hand over control of lock to another thread. 
-```notify()``` will notify the waiting thread so it can wake up and re-acquire the lock. It does NOT automatically relinquish the control of the lock.
+```notify()``` will notify the waiting thread, so it can wake up and re-acquire the lock. It does NOT automatically relinquish the control of the lock.
 If want to notify all waiting threads, can use ```notifyAll()```.
 
 ## Thread9: Producer-Consumer with Low-Level Synchronization
 Here we use the low level wait and notify synchronization to implement the producer-consumer pattern.
+
+## Thread10: Re-entrant Locks
+Reentrant lock can be used to lock and unlock a thread multiple times. It can be used to replace the ```synchronized``` keyword.
+Within reentrant lock, can use ```await()``` and ```signal()``` to achieve wait and notify. These methods are not from ```Lock``` class, but from ```Condition``` class (within Lock).
+
+## Thread11: Deadlock
+Deadlock can occur when locks are locked in different order. 
+When first thread requires lock1, then second thread requires lock2; Then first thread requires lock2 and second thread requires lock1, then neither thread can proceed, because each thread needs the lock the other thread possessed. 
+It occurs not only with re-entrant locks, but also nested synchronized blocks.
+
+To solve deadlocks:
+1. Can always lock locks in same order;
+2. Use ```tryLock()``` of ```ReentrantLock``` class to write a method that can safely acquire any number of locks in any order without causing deadlock.
+
+## Thread12: Semaphore
+Semaphore allows for controlling how many threads can access a resource simultaneously.
+```
+Semaphore sem = new Semaphore(1, true);  // 1: available permits; true: whichever thread to call acquire() first will be the first to get the next available permit
+sem.release(); // increment available permits
+sem.acquire(); // decrement available permits
+System.out.println("Available permits: " + sem.availablePermits());
+```
+In semaphore, ```acquire()``` will wait if no available permits, therefore it can be used as a lock, with the advantage that it can be unlocked from threads other than where you lock them.
+
+The usual use case of semaphore, is that it allows you to control how many threads can access a resource simultaneously.
+
+
