@@ -92,4 +92,11 @@ In semaphore, ```acquire()``` will wait if no available permits, therefore it ca
 
 The usual use case of semaphore, is that it allows you to control how many threads can access a resource simultaneously.
 
+## Thread13: Callable and Future
+```Callable``` allows thread to return a value. Return value must be the same type as ```Callable<Object>``` object type.
+The return value can then be stored in ```Future``` and accessed using ```get()```.
 
+The ```call()``` method can also be used to throw exception. The exception will be caught in ```Future``` as an ```ExecutionException```.
+
+## Thread14: Interrupting Threads
+Use ```interrupt()``` to interrupt a thread. To check whether the thread is successfully interrupted, can use either ```Thread.currentThread().isInterrupted()``` or catch an ```InterruptedException```.
